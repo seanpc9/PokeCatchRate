@@ -25,7 +25,7 @@ public double rate(Pokemon pokemon, Ball ball, String stat)
 	{
 		if (gen == 2)
 		{
-			statBonus = 1.5;
+			statBonus = 0;
 		}
 		else
 		{
