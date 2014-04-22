@@ -1,11 +1,43 @@
+import java.lang.Math
+
 public class Gen2CatchRate 
 {
 
 private double statBonus = 0;
-private int gen = 1;
+private double darkGrass = 1;
 
-public double rate(Pokemon pokemon, Ball ball, String stat)
+public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
+	if (gen == 5)
+	{
+		if (DG)
+		{
+			if (pokedex > 600)
+			{
+				darkGrass = 1;
+			}
+			else if (pokedex > 450)
+			{
+				darkGrass = .9;
+			}
+			else if (pokedex > 300)
+			{
+				darkGrass = .8;
+			}
+			else if (pokedex > 150)
+			{
+				darkGrass = .5;
+			}
+			else if (pokedex >= 30)
+			{
+				darkGrass = .5;
+			}
+			else
+			{
+				darkGrass = .3;
+			}
+		}
+	}
 	if (stat.equals("Frozen") || stat.equals("Asleep"))
 	{
 		if (gen == 2)
@@ -65,7 +97,17 @@ public double rate(Pokemon pokemon, Ball ball, String stat)
 	}
 	else
 	{
-		//I don't yet understand this generations catching algorithm to write it
+		//still have to incorporate capture power factor
+		if (DG)
+		{
+			darkGrass = Math.round((3*pokemon.maxHP()-2*pokemon.HP())*darkGrass)
+			double catchRate = darkGrass*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+		}
+		else
+		{
+			double catchRate = ((3*pokemon.maxHP()-2*pokemon.HP())*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+		}
+		return catchRate;
 	}
 
 }
