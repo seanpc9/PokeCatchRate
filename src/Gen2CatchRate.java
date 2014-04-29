@@ -6,8 +6,12 @@ public class Gen2CatchRate
 private double statBonus = 0;
 private double darkGrass = 1;
 
-public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
+public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
+	int currentHealth = percentHealth*pokemon.maxHP();
+	int catchRate = 0;
+	int b = 0; //used to determine percentage of catch rate
+	
 	if (gen == 5)
 	{
 		if (DG)
@@ -82,33 +86,33 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 	if (pokeball.equals("Master Ball"))
 	{
 		System.out.println("Caught");
-		return 100;
+		catchRate = 255;
 	}
 	
 	if (gen == 2)
 	{
-		double catchRate = (3*pokemon.maxHP()-2*pokemon.HP())*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP() + statBonus);
-		return catchRate;
+		catchRate = (3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP() + statBonus);
 	}
 	else if (gen < 5)
 	{
-		double catchRate = ((3*pokemon.maxHP()-2*pokemon.HP())*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
-		return catchRate;
+		catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
 	}
 	else
 	{
 		//still have to incorporate capture power factor
 		if (DG)
 		{
-			darkGrass = Math.round((3*pokemon.maxHP()-2*pokemon.HP())*darkGrass)
-			double catchRate = darkGrass*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+			darkGrass = Math.round((3*pokemon.maxHP()-2*currentHealth)*darkGrass)
+			catchRate = darkGrass*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
 		}
 		else
 		{
-			double catchRate = ((3*pokemon.maxHP()-2*pokemon.HP())*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+			catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
 		}
-		return catchRate;
 	}
+	
+	
+	
 
 }
 }
