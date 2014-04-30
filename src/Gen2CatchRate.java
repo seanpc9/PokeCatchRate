@@ -92,10 +92,111 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 	if (gen == 2)
 	{
 		catchRate = (3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP() + statBonus);
+		
+		if ( catchRate < 2)
+		{
+			b = 63;
+		}
+		else if (catchRate < 3)
+		{
+			b = 75;
+		}
+		else if (catchRate < 4)
+		{
+			b = 84;
+		}
+		else if (catchRate < 5)
+		{
+			b = 90;
+		}
+		else if (catchRate < 6)
+		{
+			b = 95;
+		}
+		else if (catchRate < 8)
+		{
+			b = 103;
+		}
+		else if (catchRate < 11)
+		{
+			b = 113;
+		}
+		else if (catchRate < 16)
+		{
+			b = 126;
+		}
+		else if (catchRate < 21)
+		{
+			b = 134;
+		}
+		else if (catchRate < 31)
+		{
+			b = 149;
+		}
+		else if (catchRate < 41)
+		{
+			b = 160;
+		}
+		else if (catchRate < 51)
+		{
+			b = 169;
+		}
+		else if (catchRate < 61)
+		{
+			b = 177;
+		}
+		else if (catchRate < 81)
+		{
+			b = 191;
+		}
+		else if (catchRate < 101)
+		{
+			b = 201;
+		}
+		else if (catchRate < 121)
+		{
+			b = 211;
+		}
+		else if (catchRate < 141)
+		{
+			b = 220;
+		}
+		else if (catchRate < 161)
+		{
+			b = 227;
+		}
+		else if (catchRate < 181)
+		{
+			b = 234;
+		}
+		else if (catchRate < 201)
+		{
+			b = 240;
+		}
+		else if (catchRate < 221)
+		{
+			b = 246;
+		}
+		else if (catchRate < 241)
+		{
+			b = 251;
+		}
+		else if (catchRate < 255)
+		{
+			b = 253;
+		}
+		else
+		{
+			b = 255;
+		}
+		return (Math.pow(b,3)/Math.pow(255,3))*100;
 	}
 	else if (gen < 5)
 	{
 		catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+		
+		b = (Math.pow(2,16)-1)*Math.pow((catchRate/(Math.pow(2,8)-1)),.25);
+		return (Math.pow(b,3)/Math.pow(65536,3))*100;
 	}
 	else
 	{
@@ -109,6 +210,9 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 		{
 			catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
 		}
+		
+		b = 65536 / Math.pow((255/catchRate),.25);
+		return (Math.pow(b,3)/Math.pow(65536,3))*100;
 	}
 	
 	
