@@ -1,545 +1,226 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.HashMap;
 
 public class CatchRate {
+	
+	private static String pokename;
+	private static PokemonStats pokedex;
+
 	public static void main(String args[]) {
-	int[] baserates = new int[151];
-	baserates[0] = 45;
-	baserates[1] = 45;
-	baserates[2] = 45;
-	baserates[3] = 45;
-	baserates[4] = 45;
-	baserates[5] = 45;
-	baserates[6] = 45;
-	baserates[7] = 45;
-	baserates[8] = 45;
-	baserates[9] = 255;
-	baserates[10] = 120;
-	baserates[11] = 45;
-	baserates[12] = 255;
-	baserates[13] = 120;
-	baserates[14] = 45;
-	baserates[15] = 255;
-	baserates[16] = 120;
-	baserates[17] = 45;
-	baserates[18] = 255;
-	baserates[19] = 127;
-	baserates[20] = 255;
-	baserates[21] = 90;
-	baserates[22] = 255;
-	baserates[23] = 90;
-	baserates[24] = 190;
-	baserates[25] = 75;
-	baserates[26] = 255;
-	baserates[27] = 90;
-	baserates[28] = 235;
-	baserates[29] = 120;
-	baserates[30] = 45;
-	baserates[31] = 235;
-	baserates[32] = 120;
-	baserates[33] = 45;
-	baserates[34] = 150;
-	baserates[35] = 25;
-	baserates[36] = 190;
-	baserates[37] = 75;
-	baserates[38] = 170;
-	baserates[39] = 50;
-	baserates[40] = 255;
-	baserates[41] = 90;
-	baserates[42] = 255;
-	baserates[43] = 120;
-	baserates[44] = 45;
-	baserates[45] = 190;
-	baserates[46] = 75;
-	baserates[47] = 190;
-	baserates[48] = 75;
-	baserates[49] = 255;
-	baserates[50] = 50;
-	baserates[51] = 255;
-	baserates[52] = 90;
-	baserates[53] = 190;
-	baserates[54] = 75;
-	baserates[55] = 190;
-	baserates[56] = 75;
-	baserates[57] = 190;
-	baserates[58] = 75;
-	baserates[59] = 255;
-	baserates[60] = 120;
-	baserates[61] = 45;
-	baserates[62] = 200;
-	baserates[63] = 100;
-	baserates[64] = 50;
-	baserates[65] = 180;
-	baserates[66] = 90;
-	baserates[67] = 45;
-	baserates[68] = 255;
-	baserates[69] = 120;
-	baserates[70] = 45;
-	baserates[71] = 190;
-	baserates[72] = 60;
-	baserates[73] = 255;
-	baserates[74] = 120;
-	baserates[75] = 45;
-	baserates[76] = 190;
-	baserates[77] = 60;
-	baserates[78] = 190;
-	baserates[79] = 75;
-	baserates[80] = 190;
-	baserates[81] = 60;
-	baserates[82] = 45;
-	baserates[83] = 190;
-	baserates[84] = 45;
-	baserates[85] = 190;
-	baserates[86] = 75;
-	baserates[87] = 190;
-	baserates[88] = 75;
-	baserates[89] = 190;
-	baserates[90] = 60;
-	baserates[91] = 190;
-	baserates[92] = 90;
-	baserates[93] = 45;
-	baserates[94] = 45;
-	baserates[95] = 190;
-	baserates[96] = 75;
-	baserates[97] = 225;
-	baserates[98] = 60;
-	baserates[99] = 190;
-	baserates[100] = 60;
-	baserates[101] = 90;
-	baserates[102] = 45;
-	baserates[103] = 190;
-	baserates[104] = 75;
-	baserates[105] = 45;
-	baserates[106] = 45;
-	baserates[107] = 45;
-	baserates[108] = 190;
-	baserates[109] = 60;
-	baserates[110] = 120;
-	baserates[111] = 60;
-	baserates[112] = 30;
-	baserates[113] = 45;
-	baserates[114] = 45;
-	baserates[115] = 225;
-	baserates[116] = 75;
-	baserates[117] = 225;
-	baserates[118] = 60;
-	baserates[119] = 225;
-	baserates[120] = 60;
-	baserates[121] = 45;
-	baserates[122] = 45;
-	baserates[123] = 45;
-	baserates[124] = 45;
-	baserates[125] = 45;
-	baserates[126] = 45;
-	baserates[127] = 45;
-	baserates[128] = 255;
-	baserates[129] = 45;
-	baserates[130] = 45;
-	baserates[131] = 35;
-	baserates[132] = 45;
-	baserates[133] = 45;
-	baserates[134] = 45;
-	baserates[135] = 45;
-	baserates[136] = 45;
-	baserates[137] = 45;
-	baserates[138] = 45;
-	baserates[139] = 45;
-	baserates[140] = 45;
-	baserates[141] = 45;
-	baserates[142] = 25;
-	baserates[143] = 3;
-	baserates[144] = 3;
-	baserates[145] = 3;
-	baserates[146] = 45;
-	baserates[147] = 45;
-	baserates[148] = 45;
-	baserates[149] = 3;
-	baserates[150] = 45;
-	
-	int[] basehps = new int[151];
-	basehps[0] = 45;
-	basehps[1] = 60;
-	basehps[2] = 80;
-	basehps[3] = 39;
-	basehps[4] = 58;
-	basehps[5] = 78;
-	basehps[6] = 44;
-	basehps[7] = 59;
-	basehps[8] = 79;
-	basehps[9] = 45;
-	basehps[10] = 50;
-	basehps[11] = 60;
-	basehps[12] = 40;
-	basehps[13] = 45;
-	basehps[14] = 65;
-	basehps[15] = 40;
-	basehps[16] = 63;
-	basehps[17] = 83;
-	basehps[18] = 30;
-	basehps[19] = 55;
-	basehps[20] = 40;
-	basehps[21] = 65;
-	basehps[22] = 35;
-	basehps[23] = 60;
-	basehps[24] = 35;
-	basehps[25] = 60;
-	basehps[26] = 50;
-	basehps[27] = 75;
-	basehps[28] = 55;
-	basehps[29] = 70;
-	basehps[30] = 90;
-	basehps[31] = 46;
-	basehps[32] = 61;
-	basehps[33] = 81;
-	basehps[34] = 70;
-	basehps[35] = 95;
-	basehps[36] = 38;
-	basehps[37] = 73;
-	basehps[38] = 115;
-	basehps[39] = 140;
-	basehps[40] = 40;
-	basehps[41] = 75;
-	basehps[42] = 45;
-	basehps[43] = 60;
-	basehps[44] = 75;
-	basehps[45] = 35;
-	basehps[46] = 60;
-	basehps[47] = 60;
-	basehps[48] = 70;
-	basehps[49] = 10;
-	basehps[50] = 35;
-	basehps[51] = 40;
-	basehps[52] = 65;
-	basehps[53] = 50;
-	basehps[54] = 80;
-	basehps[55] = 40;
-	basehps[56] = 65;
-	basehps[57] = 55;
-	basehps[58] = 90;
-	basehps[59] = 40;
-	basehps[60] = 65;
-	basehps[61] = 90;
-	basehps[62] = 25;
-	basehps[63] = 40;
-	basehps[64] = 55;
-	basehps[65] = 70;
-	basehps[66] = 80;
-	basehps[67] = 90;
-	basehps[68] = 50;
-	basehps[69] = 65;
-	basehps[70] = 80;
-	basehps[71] = 40;
-	basehps[72] = 80;
-	basehps[73] = 40;
-	basehps[74] = 55;
-	basehps[75] = 80;
-	basehps[76] = 50;
-	basehps[77] = 65;
-	basehps[78] = 90;
-	basehps[79] = 95;
-	basehps[80] = 25;
-	basehps[81] = 50;
-	basehps[82] = 52;
-	basehps[83] = 35;
-	basehps[84] = 60;
-	basehps[85] = 65;
-	basehps[86] = 90;
-	basehps[87] = 80;
-	basehps[88] = 105;
-	basehps[89] = 30;
-	basehps[90] = 50;
-	basehps[91] = 30;
-	basehps[92] = 45;
-	basehps[93] = 60;
-	basehps[94] = 35;
-	basehps[95] = 60;
-	basehps[96] = 85;
-	basehps[97] = 30;
-	basehps[98] = 55;
-	basehps[99] = 40;
-	basehps[100] = 60;
-	basehps[101] = 60;
-	basehps[102] = 95;
-	basehps[103] = 50;
-	basehps[104] = 60;
-	basehps[105] = 50;
-	basehps[106] = 50;
-	basehps[107] = 90;
-	basehps[108] = 40;
-	basehps[109] = 65;
-	basehps[110] = 80;
-	basehps[111] = 105;
-	basehps[112] = 250;
-	basehps[113] = 65;
-	basehps[114] = 105;
-	basehps[115] = 30;
-	basehps[116] = 55;
-	basehps[117] = 45;
-	basehps[118] = 80;
-	basehps[119] = 30;
-	basehps[120] = 60;
-	basehps[121] = 40;
-	basehps[122] = 70;
-	basehps[123] = 65;
-	basehps[124] = 65;
-	basehps[125] = 65;
-	basehps[126] = 65;
-	basehps[127] = 75;
-	basehps[128] = 20;
-	basehps[129] = 95;
-	basehps[130] = 130;
-	basehps[131] = 48;
-	basehps[132] = 55;
-	basehps[133] = 130;
-	basehps[134] = 65;
-	basehps[135] = 65;
-	basehps[136] = 65;
-	basehps[137] = 35;
-	basehps[138] = 70;
-	basehps[139] = 30;
-	basehps[140] = 60;
-	basehps[141] = 80;
-	basehps[142] = 160;
-	basehps[143] = 90;
-	basehps[144] = 90;
-	basehps[145] = 90;
-	basehps[146] = 41;
-	basehps[147] = 61;
-	basehps[148] = 91;
-	basehps[149] = 106;
-	basehps[150] = 100;
-
-	String[] pokenames = new String[151];
-	pokenames[0] = "Bulbasaur";
-	pokenames[1] = "Ivysaur";
-	pokenames[2] = "Venusaur";
-	pokenames[3] = "Charmander";
-	pokenames[4] = "Charmeleon";
-	pokenames[5] = "Charizard";
-	pokenames[6] = "Squirtle";
-	pokenames[7] = "Wartortle";
-	pokenames[8] = "Blastoise";
-	pokenames[9] = "Caterpie";
-	pokenames[10] = "Metapod";
-	pokenames[11] = "Butterfree";
-	pokenames[12] = "Weedle";
-	pokenames[13] = "Kakuna";
-	pokenames[14] = "Beedrill";
-	pokenames[15] = "Pidgey";
-	pokenames[16] = "Pidgeotto";
-	pokenames[17] = "Pidgeot";
-	pokenames[18] = "Rattata";
-	pokenames[19] = "Raticate";
-	pokenames[20] = "Spearow";
-	pokenames[21] = "Fearow";
-	pokenames[22] = "Ekans";
-	pokenames[23] = "Arbok";
-	pokenames[24] = "Pikachu";
-	pokenames[25] = "Raichu";
-	pokenames[26] = "Sandshrew";
-	pokenames[27] = "Sandslash";
-	pokenames[28] = "Nidoran F";
-	pokenames[29] = "Nidorina";
-	pokenames[30] = "Nidoqueen";
-	pokenames[31] = "Nidoran M";
-	pokenames[32] = "Nidorino";
-	pokenames[33] = "Nidoking";
-	pokenames[34] = "Clefairy";
-	pokenames[35] = "Clefable";
-	pokenames[36] = "Vulpix";
-	pokenames[37] = "Ninetales";
-	pokenames[38] = "Jigglypuff";
-	pokenames[39] = "Wigglytuff";
-	pokenames[40] = "Zubat";
-	pokenames[41] = "Golbat";
-	pokenames[42] = "Oddish";
-	pokenames[43] = "Gloom";
-	pokenames[44] = "Vileplume";
-	pokenames[45] = "Paras";
-	pokenames[46] = "Parasect";
-	pokenames[47] = "Venonat";
-	pokenames[48] = "Venomoth";
-	pokenames[49] = "Diglett";
-	pokenames[50] = "Dugtrio";
-	pokenames[51] = "Meowth";
-	pokenames[52] = "Persian";
-	pokenames[53] = "Psyduck";
-	pokenames[54] = "Golduck";
-	pokenames[55] = "Mankey";
-	pokenames[56] = "Primeape";
-	pokenames[57] = "Growlithe";
-	pokenames[58] = "Arcanine";
-	pokenames[59] = "Poliwag";
-	pokenames[60] = "Poliwhirl";
-	pokenames[61] = "Poliwrath";
-	pokenames[62] = "Abra";
-	pokenames[63] = "Kadabra";
-	pokenames[64] = "Alakazam";
-	pokenames[65] = "Machop";
-	pokenames[66] = "Machoke";
-	pokenames[67] = "Machamp";
-	pokenames[68] = "Bellsprout";
-	pokenames[69] = "Weepinbell";
-	pokenames[70] = "Victreebel";
-	pokenames[71] = "Tentacool";
-	pokenames[72] = "Tentacruel";
-	pokenames[73] = "Geodude";
-	pokenames[74] = "Graveler";
-	pokenames[75] = "Golem";
-	pokenames[76] = "Ponyta";
-	pokenames[77] = "Rapidash";
-	pokenames[78] = "Slowpoke";
-	pokenames[79] = "Slowbro";
-	pokenames[80] = "Magnemite";
-	pokenames[81] = "Magneton";
-	pokenames[82] = "Farfetch'd";
-	pokenames[83] = "Doduo";
-	pokenames[84] = "Dodrio";
-	pokenames[85] = "Seel";
-	pokenames[86] = "Dewgong";
-	pokenames[87] = "Grimer";
-	pokenames[88] = "Muk";
-	pokenames[89] = "Shellder";
-	pokenames[90] = "Cloyster";
-	pokenames[91] = "Gastly";
-	pokenames[92] = "Haunter";
-	pokenames[93] = "Gengar";
-	pokenames[94] = "Onix";
-	pokenames[95] = "Drowzee";
-	pokenames[96] = "Hypno";
-	pokenames[97] = "Krabby";
-	pokenames[98] = "Kingler";
-	pokenames[99] = "Voltorb";
-	pokenames[100] = "Electrode";
-	pokenames[101] = "Exeggcute";
-	pokenames[102] = "Exeggutor";
-	pokenames[103] = "Cubone";
-	pokenames[104] = "Marowak";
-	pokenames[105] = "Hitmonlee";
-	pokenames[106] = "Hitmonchan";
-	pokenames[107] = "Lickitung";
-	pokenames[108] = "Koffing";
-	pokenames[109] = "Weezing";
-	pokenames[110] = "Rhyhorn";
-	pokenames[111] = "Rhydon";
-	pokenames[112] = "Chansey";
-	pokenames[113] = "Tangela";
-	pokenames[114] = "Kangaskhan";
-	pokenames[115] = "Horsea";
-	pokenames[116] = "Seadra";
-	pokenames[117] = "Goldeen";
-	pokenames[118] = "Seaking";
-	pokenames[119] = "Staryu";
-	pokenames[120] = "Starmie";
-	pokenames[121] = "Mr. Mime";
-	pokenames[122] = "Scyther";
-	pokenames[123] = "Jynx";
-	pokenames[124] = "Electabuzz";
-	pokenames[125] = "Magmar";
-	pokenames[126] = "Pinsir";
-	pokenames[127] = "Tauros";
-	pokenames[128] = "Magikarp";
-	pokenames[129] = "Gyarados";
-	pokenames[130] = "Lapras";
-	pokenames[131] = "Ditto";
-	pokenames[132] = "Eevee";
-	pokenames[133] = "Vaporeon";
-	pokenames[134] = "Jolteon";
-	pokenames[135] = "Flareon";
-	pokenames[136] = "Porygon";
-	pokenames[137] = "Omanyte";
-	pokenames[138] = "Omastar";
-	pokenames[139] = "Kabuto";
-	pokenames[140] = "Kabutops";
-	pokenames[141] = "Aerodactyl";
-	pokenames[142] = "Snorlax";
-	pokenames[143] = "Articuno";
-	pokenames[144] = "Zapdos";
-	pokenames[145] = "Moltres";
-	pokenames[146] = "Dratini";
-	pokenames[147] = "Dragonair";
-	pokenames[148] = "Dragonite";
-	pokenames[149] = "Mewtwo";
-	pokenames[150] = "Mew";
-
-	int [][] arrays = { baserates, basehps };
-	
-	Scanner input = new Scanner(System.in);
-	String pokename;
-	System.out.println("Enter the name of the pokemon you want to catch.");
-	pokename = input.nextLine();
-	String pokeball;
-	System.out.println("Enter the name of the poke ball that you are using.");
-	pokeball = input.nextLine();
-	String stat;
-	System.out.println("Enter the status ailment of the pokemon if there is one");
-	stat = input.nextLine();
-	int level = 0;
-	System.out.println("Enter the level of the pokemon");
-	level = Integer.parseInt(input.nextLine());
-	
-	int index = 0;
-	
-	for(int i = 0; i < pokenames.length; i++)
-	{
-		if(pokenames[i].equals(pokename))
+		
+		Scanner input = new Scanner(System.in);
+		String pokeball;
+		System.out.println("Enter the name of the poke ball that you are using.");
+		pokeball = input.nextLine();
+		System.out.println("Enter the name of the pokemon you want to catch.");
+		pokename = input.nextLine();
+		String stat;
+		System.out.println("Enter the status ailment of the pokemon if there is one (Enter \"None\" if there is no ailment)");
+		stat = input.nextLine();
+		int level = 0;
+		System.out.println("Enter the level of the pokemon");
+		level = Integer.parseInt(input.nextLine());
+		int percenthealth = 0;
+		System.out.println("Enter the estimated percent health of the pokemon");
+		percenthealth = Integer.parseInt(input.nextLine());
+		
+		int index = 0;
+		pokedex = new PokemonStats("PokemonStatsTable.txt");
+		/*
+		System.out.println(pokename);
+		System.out.println(pokedex.getPokedex().get(pokename).getNationalNumber());
+		System.out.println(pokedex.getPokedex().get(pokename).getBaseRate());
+		System.out.println(pokedex.getPokedex().get(pokename).getBaseHP());
+		System.out.println(pokeball);
+		System.out.println(stat);
+		System.out.println(level);
+		*/
+		
+		Random rand = new Random();
+		int randnum = -1;
+		int range = -1;
+		// Step 1
+		if (pokeball.equals("Master Ball"))
 		{
-			index = i;
-			System.out.println(pokename);
-			System.out.println(baserates[index]);
-			System.out.println(basehps[index]);
-			System.out.println(pokeball);
-			System.out.println(stat);
+			System.out.println("You have a 100% chance of catching the pokemon.");
+			return;
 		}
+		
+		// Step 2
+		else if (pokeball.equals("Poke Ball"))
+		{
+			randnum = rand.nextInt(256);
+			range = 256;
+		}
+		else if (pokeball.equals("Great Ball"))
+		{
+			randnum = rand.nextInt(201);
+			range = 201;
+		}
+		else if (pokeball.equals("Ultra Ball") || pokeball.equals("Safari Ball"))
+		{
+			randnum = rand.nextInt(151);
+			range = 151;
+		}
+		else
+		{
+			System.out.println("Please enter a valid name for a poke ball");
+			return;
+		}
+		
+		// Step 3
+		int change = -1;
+		if (stat.equals("Asleep") || stat.equals("Frozen"))
+		{
+			change = 25;
+		}
+		else if (stat.equals("Poisoned") || stat.equals("Burned") || stat.equals("Paralyzed"))
+		{
+			change = 12;
+		}
+		else
+		{
+			change = 0;
+		}
+		
+		// Step 4
+		/*int newr = randnum - change;
+		
+		// Step 5
+		if (newr < 0)
+		{
+			System.out.println("It's caught!");
+			return;
+		}*/
+		
+		// Step 6
+		int max = calcMaxHP(pokedex, level);
+		int hpfactor = max * 255;
+		if(pokeball.equals("Great Ball"))
+		{
+			hpfactor /= 8;
+		}
+		else
+		{
+			hpfactor /= 12;
+		}
+		
+		int current = (percenthealth * max) / 100;
+		current /= 4;
+		if (current > 0)
+		{
+			hpfactor /= current;
+		}
+		
+		if (hpfactor > 255)
+		{
+			hpfactor = 255;
+		}
+		
+		// Step 7
+		/*if (pokedex.getPokedex().get(pokename).getBaseRate() < newr)
+		{
+			System.out.println("The Pokemon breaks free!");
+			return;
+		}
+		
+		// Step 8
+		int randnum2 = rand.nextInt(256);
+		
+		// Step 9
+		if (randnum2 <= hpfactor)
+		{
+			System.out.println("Pokemon is caught!");
+			return;
+		}
+		
+		// Step 10
+		// Part 1
+		int wobble = pokedex.getPokedex().get(pokename).getBaseRate() * 100;
+		
+		// Part 2
+	    if (pokeball.equals("Poke Ball"))
+		{
+			wobble /= 255;
+		}
+		else if (pokeball.equals("Great Ball"))
+		{
+			wobble /= 200;
+		}
+		else
+		{
+			wobble /= 150;
+		}
+	    
+	    // Part 3
+	    if (wobble > 255)
+	    {
+	    	System.out.println("The ball wobbled three times");
+	    	return;
+	    }
+	    
+	    // Part 4
+	    wobble *= hpfactor;
+	    
+	    // Part 5
+	    wobble /= 255;
+	    
+	    // Part 6
+		if (stat.equals("Asleep") || stat.equals("Frozen"))
+		{
+			wobble += 10;
+		}
+		else if (stat.equals("Poisoned") || stat.equals("Burned") || stat.equals("Paralyzed"))
+		{
+			wobble += 5;
+		}
+		else
+		{
+			wobble += 0;
+		}
+		
+		// Part 7
+		if (wobble < 10)
+		{
+			System.out.println("The ball misses");
+			//return;
+		}
+		else if (wobble >= 10 && wobble < 30)
+		{
+			System.out.println("The ball wobbles once");
+			//return;
+		}
+		else if (wobble >= 30 && wobble < 70)
+		{
+			System.out.println("The ball wobbles twice");
+			//return;
+		}
+		else
+		{
+			System.out.println("The ball wobbles three times");
+			//return;
+		}*/
+		
+		int basecatchrate = pokedex.getPokedex().get(pokename).getBaseRate();
+		double finalrate = 100 * ((double)change + (double)(basecatchrate + 1) * (double)(hpfactor + 1)) / 256 / range;
+		if (finalrate > 100)
+		{
+			finalrate = 100;
+		}
+		/*System.out.println(change);
+		System.out.println(basecatchrate);
+		System.out.println(hpfactor);
+		System.out.println(range);*/
+		System.out.println("You have a " + finalrate + " percent chance of catching the pokemon");
 	}
 	
-	Random rand = new Random();
-	int randnum = -1;
-	
-	if (pokeball.equals("Master Ball"))
+	public static int calcMaxHP(PokemonStats poked, int lvl)
 	{
-		System.out.println("It's caught!");
-		return;
+		int iv = 8;
+		int basehp = poked.getPokedex().get(pokename).getBaseHP();
+		int numerator = (iv + basehp + 50) * lvl;
+		int current = numerator / 50 + 10;
+		return current;
 	}
-	else if (pokeball.equals("Poke Ball"))
-	{
-		randnum = rand.nextInt(256);
-	}
-	else if (pokeball.equals("Great Ball"))
-	{
-		randnum = rand.nextInt(201);
-	}
-	else if (pokeball.equals("Ultra Ball") || pokeball.equals("Safari Ball"))
-	{
-		randnum = rand.nextInt(151);
-	}
-	else
-	{
-		System.out.println("Please enter a valid name for a poke ball");
-		return;
-	}
-	
-	int change = -1;
-	
-	if (stat.equals("Asleep") || stat.equals("Frozen"))
-	{
-		change = 25;
-	}
-	else if (stat.equals("Poisoned") || stat.equals("Burned") || stat.equals("Paralyzed"))
-	{
-		change = 12;
-	}
-	else
-	{
-		change = 0;
-	}
-	
-	int newr = randnum - change;
-	
-	if (newr < 0)
-	{
-		System.out.println("It's caught!");
-		return;
-	}
-}
 }
