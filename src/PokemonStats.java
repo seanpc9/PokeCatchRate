@@ -53,7 +53,7 @@ public class PokemonStats
         }
         catch (FileNotFoundException e)
         {
-            System.out.println("Cannot find file");
+            throw new FileNotFoundException("Cannot find file.");
         }
     }
 
