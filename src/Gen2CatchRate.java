@@ -4,16 +4,23 @@ import java.util.HashMap;
 public class Gen2CatchRate 
 {
 
-private double statBonus = 0;
-private double darkGrass = 1;
+	private static String pokename;
+	private static PokemonStats pokedex;
 
-public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
+public double rate(String stat, int gen, int pokedex,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
-	int maxHP = calcMaxHP();
-	int currentHealth = percentHealth*maxHP(pokemon, level, gen);
+	
+	
+	pokedex = new PokemonStats("PokemonStatsTable.txt");
+	
+	int maxHP = calcMaxHP(pokedex, level, gen);
+	int currentHealth = percentHealth*maxHP;
 	int catchRate = 0;
 	int b = 0; //used to determine percentage of catch rate
+	double statBonus = 0;
+	double darkGrass = 1;
 	
+
 	if (gen == 5)
 	{
 		if (DG)
@@ -88,12 +95,12 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 	if (pokeball.equals("Master Ball"))
 	{
 		System.out.println("Caught");
-		catchRate = 255;
+		return 100;
 	}
 	
-	if (gen == 2)
+	else if (gen == 2)
 	{
-		catchRate = (3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP() + statBonus);
+		catchRate = (3*maxHP()-2*currentHealth)*(pokedex.getPokedex().get(pokename).getBaseRate()*ball.Bonus())/(3*maxHP() + statBonus);
 		
 		if ( catchRate < 2)
 		{
@@ -195,7 +202,7 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 	}
 	else if (gen < 5)
 	{
-		catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+		catchRate = ((3*maxHP-2*currentHealth)*(pokedex.getPokedex().get(pokename).getBaseRate()*ball.Bonus())/(3*maxHP*statBonus);
 		
 		b = (Math.pow(2,16)-1)*Math.pow((catchRate/(Math.pow(2,8)-1)),.25);
 		return (Math.pow(b,3)/Math.pow(65536,3))*100;
@@ -205,12 +212,12 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 		//still have to incorporate capture power factor
 		if (DG)
 		{
-			darkGrass = Math.round((3*pokemon.maxHP()-2*currentHealth)*darkGrass)
-			catchRate = darkGrass*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+			darkGrass = Math.round((3*maxHP-2*currentHealth)*darkGrass)
+			catchRate = darkGrass*(pokedex.getPokedex().get(pokename).getBaseRate()*ball.Bonus())/(3*maxHP*statBonus);
 		}
 		else
 		{
-			catchRate = ((3*pokemon.maxHP()-2*currentHealth)*(pokemon.CatchRate()*ball.Bonus())/(3*pokemon.maxHP())*statBonus);
+			catchRate = ((3*maxHP-2*currentHealth)*(pokedex.getPokedex().get(pokename).getBaseRate()*ball.Bonus())/(3*maxHP*statBonus);
 		}
 		
 		b = 65536 / Math.pow((255/catchRate),.25);
@@ -222,18 +229,18 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 
 }
 
-public static int calcMaxHP(Pokemon pokemon, int lvl, int gen)
+public static int calcMaxHP(Pokestats pokedex, int lvl, int gen)
 	{
 		if gen = 2
 		{
-			int basehp = pokemon.getBaseHP();
+			int basehp = pokedex.getPokedex().get(pokename).getBaseHP();
 			int numerator = (8 + basehp + 50) * lvl;
 			int current = numerator / 50 + 10;
 			return current;
 		}
 		else
 		{
-			int basehp = pokemon.getBaseHP();
+			int basehp = pokedex.getPokedex().get(pokename).getBaseHP();
 			int numerator = (8 + 2*basehp + 100)*lvl;
 			int current = numerator / 100 + 10;
 			return current;
