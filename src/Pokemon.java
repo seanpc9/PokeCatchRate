@@ -1,3 +1,4 @@
+ 
 import java.util.HashMap;
 
 //----------------------------------------------------------------------------
@@ -25,10 +26,16 @@ public class Pokemon
      */
     public Pokemon(String name)
     {
+
+        map = new HashMap<String, Tuple<Integer, Integer>>();
+
         initializeMap();
         Tuple<Integer, Integer> tuple = map.get(name);
-        baseCatchRate = tuple.getX();
-        maxHP = tuple.getY();
+
+
+            baseCatchRate = tuple.getX();
+            maxHP = tuple.getY();
+
     }
 
     // ------------------------------------------------------------------------
@@ -86,10 +93,10 @@ public class Pokemon
         map.put("Raichu", new Tuple(75, 60));
         map.put("Sandshrew", new Tuple(255, 50));
         map.put("Sandslash", new Tuple(90, 75));
-        map.put("Nidoran?", new Tuple(235, 55));
+        map.put("Nidoran F", new Tuple(235, 55));
         map.put("Nidorina", new Tuple(120, 70));
         map.put("Nidoqueen", new Tuple(45, 90));
-        map.put("Nidoran?", new Tuple(235, 46));
+        map.put("Nidoran M", new Tuple(235, 46));
         map.put("Nidorino", new Tuple(120, 61));
         map.put("Nidoking", new Tuple(45, 81));
         map.put("Clefairy", new Tuple(150, 70));
