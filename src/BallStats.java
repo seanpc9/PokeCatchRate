@@ -28,7 +28,7 @@ public class BallStats
                 String ballName = "";
                 int i = 0;
 
-                while (!scan.hasNextInt())
+                while (!scan.hasNextDouble())
                 {
                     if (i > 0) // if the name has multiple parts to read
                     {
