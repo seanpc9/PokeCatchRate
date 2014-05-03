@@ -3,9 +3,27 @@ import java.util.HashMap;
 
 public class Gen2CatchRate 
 {
+	
+	private static Pokemon pokedex;
+    	private static String pokemonName;
+    	
+    	private static Ball 
+    	
+    	private int level;
+    	private int percentHP;
+    	private String pokeBall;
+    	private String status;
 
-	private static String pokename;
-	private static PokemonStats pokedex;
+    	private int baseCatchRate;
+	private int baseHP;
+	
+    	private int maxHP;
+    	private int currentHP;
+    	private int hpfactor;
+    	
+    	private double statBonus;
+    	private double darkGrass;
+
 
 public double rate(String stat, int gen, int pokedexNum,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
@@ -13,12 +31,12 @@ public double rate(String stat, int gen, int pokedexNum,int level, int percentHe
 	
 	pokedex = new PokemonStats("PokemonStatsTable.txt");
 	
-	int maxHP = calcMaxHP(pokedex, level, gen);
-	int currentHealth = percentHealth*maxHP;
-	int catchRate = 0;
+	maxHP = calcMaxHP(pokedex, level, gen);
+	currentHealth = (percentHP/100)*maxHP;
+	catchRate = 0;
 	int b = 0; //used to determine percentage of catch rate
-	double statBonus = 0;
-	double darkGrass = 1;
+	statBonus = 0;
+	darkGrass = 1;
 	
 
 	if (gen == 5)
@@ -209,7 +227,6 @@ public double rate(String stat, int gen, int pokedexNum,int level, int percentHe
 	}
 	else
 	{
-		//still have to incorporate capture power factor
 		if (DG)
 		{
 			darkGrass = Math.round((3*maxHP-2*currentHealth)*darkGrass)
@@ -231,7 +248,7 @@ public double rate(String stat, int gen, int pokedexNum,int level, int percentHe
 
 public static int calcMaxHP(Pokestats pokedex, int lvl, int gen)
 	{
-		if gen = 2
+		if (gen == 2)
 		{
 			int basehp = pokedex.getPokedex().get(pokename).getBaseHP();
 			int numerator = (8 + basehp + 50) * lvl;
