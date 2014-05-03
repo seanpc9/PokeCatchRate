@@ -7,7 +7,7 @@ public class Gen2CatchRate
 	private static String pokename;
 	private static PokemonStats pokedex;
 
-public double rate(String stat, int gen, int pokedex,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
+public double rate(String stat, int gen, int pokedexNum,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
 	
 	
@@ -25,23 +25,23 @@ public double rate(String stat, int gen, int pokedex,int level, int percentHealt
 	{
 		if (DG)
 		{
-			if (pokedex > 600)
+			if (pokedexNum > 600)
 			{
 				darkGrass = 1;
 			}
-			else if (pokedex > 450)
+			else if (pokedexNum > 450)
 			{
 				darkGrass = .9;
 			}
-			else if (pokedex > 300)
+			else if (pokedexNum > 300)
 			{
 				darkGrass = .8;
 			}
-			else if (pokedex > 150)
+			else if (pokedexNum > 150)
 			{
 				darkGrass = .5;
 			}
-			else if (pokedex >= 30)
+			else if (pokedexNum >= 30)
 			{
 				darkGrass = .5;
 			}
