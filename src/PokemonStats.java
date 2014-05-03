@@ -15,10 +15,11 @@ public class PokemonStats
     /**
      * Creates a PokemonStats object.
      */
-    public PokemonStats()
+    public PokemonStats(String fileName)
     {
-        statsFile = new File("PokemonStatsTable.txt");
+        statsFile = new File(fileName);
         pokedex = new HashMap<String, Pokemon>();
+		readStats();
     }
     
     /**
@@ -28,7 +29,7 @@ public class PokemonStats
     {
         try 
         {
-            Scanner scanner = new Scanner(statsFile);
+            scanner = new Scanner(statsFile);
             
             while (scanner.hasNext()) // until the file has no more data
             {

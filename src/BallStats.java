@@ -15,6 +15,7 @@ public class BallStats
     {
         statsFile = new File("BallStats.txt");
         list = new HashMap<String, Ball>();
+		readStats();
     }
 
     public void readStats()
