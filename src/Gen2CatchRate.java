@@ -6,9 +6,10 @@ public class Gen2CatchRate
 private double statBonus = 0;
 private double darkGrass = 1;
 
-public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
+public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex,int level, int percentHealth  /*number of pokeomn caught by trainer)*/ , boolean DG /* if battle is in dark grass*/ )
 {
-	int currentHealth = percentHealth*pokemon.maxHP();
+	int maxHP = calcMaxHP();
+	int currentHealth = percentHealth*maxHP(pokemon, level, gen);
 	int catchRate = 0;
 	int b = 0; //used to determine percentage of catch rate
 	
@@ -219,6 +220,24 @@ public double rate(Pokemon pokemon, Ball ball, String stat, int gen, int pokedex
 	
 
 }
+
+public static int calcMaxHP(Pokemon pokemon, int lvl, int gen)
+	{
+		if gen = 2
+		{
+			int basehp = pokemon.getBaseHP();
+			int numerator = (8 + basehp + 50) * lvl;
+			int current = numerator / 50 + 10;
+			return current;
+		}
+		else
+		{
+			int basehp = pokemon.getBaseHP();
+			int numerator = (8 + 2*basehp + 100)*lvl;
+			int current = numerator / 100 + 10;
+			return current;
+		}
+	}
 }
 
 
