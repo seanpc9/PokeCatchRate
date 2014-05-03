@@ -16,7 +16,7 @@ public class Ball
         return ballMod;
     }
     
-    public void initializeMap()
+    public void initializeMap(int gen)
     {
         if (gen == 1)
         {
