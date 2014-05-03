@@ -49,7 +49,7 @@ public class BallStats
         }
     }
 
-    public HashMap<String, Ball> getBalls()
+    public HashMap<String, Ball> getBag()
     {
         return list;
     }
