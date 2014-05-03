@@ -1,4 +1,4 @@
-// Stole job from Ryan, forget what I was actually supposed to do, copied Pokemon classes in pokeball format
+import java.util.HashMap;
 
 public class Ball
 {
@@ -7,6 +7,7 @@ public class Ball
 
     public Ball(String name, int gen)
     {
+        map = new HashMap<String, Double>();
         initializeMap(gen);
         ballMod = map.get(name);
     }
@@ -20,15 +21,16 @@ public class Ball
     {
         if (gen == 1)
         {
-            map.put("Poké Ball", 256.0);
+            map.put("Poke Ball", 256.0);
             map.put("Great Ball", 201.0);
             map.put("Ultra Ball", 151.0);
             map.put("Safari Ball", 151.0);
             return;
         }
+        
         if (gen == 2)
         {
-            map.put("Poké Ball", 1.0);
+            map.put("Poke Ball", 1.0);
             map.put("Friend Ball", 1.0);
             map.put("Great Ball", 1.5);
             map.put("Park Ball", 1.5);
@@ -46,9 +48,10 @@ public class Ball
             map.put("Master Ball", -1.0);
             return;
         }
+        
         if (gen == 3 || gen == 4)
         {
-            map.put("Poké Ball", 1.0);
+            map.put("Poke Ball", 1.0);
             map.put("Premier Ball", 1.0);
             map.put("Luxury Ball", 1.0);
             map.put("Heal Ball", 1.0);
@@ -78,9 +81,10 @@ public class Ball
             map.put("Park Ball", -1.0); //
             return;
         }
+        
         if (gen == 5)
         {
-            map.put("Poké Ball", 1.0);
+            map.put("Poke Ball", 1.0);
             map.put("Premier Ball", 1.0);
             map.put("Luxury Ball", 1.0);
             map.put("Heal Ball", 1.0);

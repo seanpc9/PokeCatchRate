@@ -1,4 +1,4 @@
-package com.mischamichael.catchemall02.app; 
+  
 
         import java.util.Random;
         import java.util.Scanner;
