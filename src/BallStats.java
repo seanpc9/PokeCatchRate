@@ -45,7 +45,7 @@ public class BallStats
         }
         catch (FileNotFoundException e)
         {
-            System.out.println("Cannot find file");
+            throw new FileNotFoundException("Cannot find file.");
         }
     }
 
