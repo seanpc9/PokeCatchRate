@@ -2,7 +2,7 @@
 
 public class Ball
 {
-    private HashMap<String, Doubles> map;
+    private HashMap<String, Double> map;
     private double ballMod;
 
     public Ball(String name, int gen)
