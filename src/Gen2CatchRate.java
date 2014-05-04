@@ -15,14 +15,9 @@ public class Gen2CatchRate
 	private int percentHealth;
 	private boolean dG;
 
-	private String status;
-
 	private int baseCatchRate;
 	private int baseHP;
-
 	private int maxHP;
-	private int currentHP;
-	private int hpfactor;
 	
 	private double statBonus;
 	private double darkGrass;
@@ -40,15 +35,15 @@ public class Gen2CatchRate
 		this.level = level;
 		this.percentHealth = percentHealth;
 		this.dG = dG;
+		
+		this.baseCatchRate = pokedex.getBaseCatchRate();
+        this.baseHP = pokedex.getMaxHP();
 	}
 
-	public double rate()
+	public double getRate()
 	{
-		
-		baseCatchRate = pokedex.getBaseCatchRate();
-        baseHP = pokedex.getMaxHP();
-		
-		maxHP = calcMaxHP(level, gen);
+	    
+		maxHP = calcMaxHP();
 		int currentHealth = (percentHealth/100)*maxHP;
 		double catchRate = 0;
 		double b = 0; //used to determine percentage of catch rate
@@ -86,6 +81,7 @@ public class Gen2CatchRate
 				}
 			}
 		}
+		
 		if (stat.equals("Frozen") || stat.equals("Asleep"))
 		{
 			if (gen == 2)
@@ -123,9 +119,6 @@ public class Gen2CatchRate
 				statBonus = 1;
 			}
 		}
-		
-		
-		
 		
 		if (pokeBall.equals("Master Ball"))
 		{
@@ -257,23 +250,20 @@ public class Gen2CatchRate
 			b = 65536 / Math.pow((255/catchRate),.25);
 			return (Math.pow(b,3)/Math.pow(65536,3))*100;
 		}
-		
-		
-		
 
 	}
 
-	public int calcMaxHP(int lvl, int gen)
+	public int calcMaxHP()
 		{
 			if (gen == 2)
 			{
-				int numerator = (8 + baseHP + 50) * lvl;
+				int numerator = (8 + baseHP + 50) * level;
 				int current = numerator / 50 + 10;
 				return current;
 			}
 			else
 			{
-				int numerator = (8 + 2*baseHP + 100)*lvl;
+				int numerator = (8 + 2*baseHP + 100) * level;
 				int current = numerator / 100 + 10;
 				return current;
 			}
