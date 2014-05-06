@@ -14,7 +14,7 @@ public class Gen2CatchRate
 	private int level;
 	private int percentHealth;
 	private boolean dG;
-
+	
 	private int baseCatchRate;
 	private int baseHP;
 	private int maxHP;
@@ -44,42 +44,53 @@ public class Gen2CatchRate
 	{
 	    
 		maxHP = calcMaxHP();
-		int currentHealth = (percentHealth/100)*maxHP;
+		int currentHealth = (percentHealth*maxHP/100);
 		double catchRate = 0;
 		double b = 0; //used to determine percentage of catch rate
 		statBonus = 0;
 		darkGrass = 1;
+		double cc = 0;
 		
 
 		if (gen == 5)
 		{
-			if (dG)
-			{
+			
 				if (pokedexNum > 600)
 				{
+					if (dG)
 					darkGrass = 1;
+					cc = 2.5;
 				}
 				else if (pokedexNum > 450)
 				{
+					if (dG)
 					darkGrass = .9;
+					cc = 2;
 				}
 				else if (pokedexNum > 300)
 				{
+					if (dG)
 					darkGrass = .8;
+					cc = 1.5;
 				}
 				else if (pokedexNum > 150)
 				{
+					if (dG)
 					darkGrass = .5;
+					cc = 1;
 				}
 				else if (pokedexNum >= 30)
 				{
+					if (dG)
 					darkGrass = .5;
+					cc = .5;
 				}
 				else
 				{
+					if (dG)
 					darkGrass = .3;
+					cc = 0;
 				}
-			}
 		}
 		
 		if (stat.equals("Frozen") || stat.equals("Asleep"))
@@ -122,153 +133,64 @@ public class Gen2CatchRate
 		
 		if (pokeBall.equals("Master Ball"))
 		{
-			System.out.println("Caught");
 			return 100;
 		}
 		
 		else if (gen == 2)
 		{
-			catchRate = (3*maxHP-2*currentHealth)*baseCatchRate*pokeBall.getBallMod()/(3*maxHP) + statBonus;
+			catchRate = (Math.max(((3*maxHP-2*currentHealth)*baseCatchRate*pokeBall.getBallMod())/(3*maxHP), 1) + statBonus);
 			
-			if ( catchRate < 2)
-			{
-				b = 63;
-			}
-			else if (catchRate < 3)
-			{
-				b = 75;
-			}
-			else if (catchRate < 4)
-			{
-				b = 84;
-			}
-			else if (catchRate < 5)
-			{
-				b = 90;
-			}
-			else if (catchRate < 6)
-			{
-				b = 95;
-			}
-			else if (catchRate < 8)
-			{
-				b = 103;
-			}
-			else if (catchRate < 11)
-			{
-				b = 113;
-			}
-			else if (catchRate < 16)
-			{
-				b = 126;
-			}
-			else if (catchRate < 21)
-			{
-				b = 134;
-			}
-			else if (catchRate < 31)
-			{
-				b = 149;
-			}
-			else if (catchRate < 41)
-			{
-				b = 160;
-			}
-			else if (catchRate < 51)
-			{
-				b = 169;
-			}
-			else if (catchRate < 61)
-			{
-				b = 177;
-			}
-			else if (catchRate < 81)
-			{
-				b = 191;
-			}
-			else if (catchRate < 101)
-			{
-				b = 201;
-			}
-			else if (catchRate < 121)
-			{
-				b = 211;
-			}
-			else if (catchRate < 141)
-			{
-				b = 220;
-			}
-			else if (catchRate < 161)
-			{
-				b = 227;
-			}
-			else if (catchRate < 181)
-			{
-				b = 234;
-			}
-			else if (catchRate < 201)
-			{
-				b = 240;
-			}
-			else if (catchRate < 221)
-			{
-				b = 246;
-			}
-			else if (catchRate < 241)
-			{
-				b = 251;
-			}
-			else if (catchRate < 255)
-			{
-				b = 253;
-			}
-			else
-			{
-				b = 255;
-			}
-			return (Math.pow(b,3)/Math.pow(255,3))*100;
+			System.out.println(maxHP + " " + currentHealth + " " + baseCatchRate);
+			
+			
+			return ((catchRate+1)/256)*100;
 		}
 		else if (gen < 5)
 		{
-			catchRate = ((3*maxHP-2*currentHealth)*(baseCatchRate*pokeBall.getBallMod())/(3*maxHP*statBonus));
+			catchRate = ((3*maxHP-2*currentHealth)*(baseCatchRate*pokeBall.getBallMod())/(3*maxHP)) * statBonus;
 			
-			b = (Math.pow(2,16)-1)*Math.pow((catchRate/(Math.pow(2,8)-1)),.25);
-			return (Math.pow(b,3)/Math.pow(65536,3))*100;
+			b = Math.round((65535) / Math.pow((255/catchRate), .25));
+			if (catchRate >= 255)
+			{
+				return 100;
+			}
+			return (Math.pow(b, 4)/Math.pow(65536.0, 4)) * 100;
 		}
 		else
 		{
 			if (dG)
 			{
 				darkGrass = Math.round((3*maxHP-2*currentHealth)*darkGrass);
-				catchRate = darkGrass*(baseCatchRate*pokeBall.getBallMod())/(3*maxHP*statBonus);
+				catchRate = Math.floor(Math.round(Math.floor(Math.round(Math.round(darkGrass*(baseCatchRate*pokeBall.getBallMod())/(3*maxHP)*statBonus)))));
 			}
 			else
 			{
-				catchRate = ((3*maxHP-2*currentHealth)*baseCatchRate*pokeBall.getBallMod())/(3*maxHP*statBonus);
+				catchRate = (((3*maxHP - 2*currentHealth) * baseCatchRate * pokeBall.getBallMod()) / (3*maxHP))*statBonus;
 			}
-			
-			b = 65536 / Math.pow((255/catchRate),.25);
-			return (Math.pow(b,3)/Math.pow(65536,3))*100;
+			if (catchRate >= 255)
+			{
+				return 100;
+			}
+			double CC = (Math.min(255,catchRate)*cc/6);
+			b = Math.round(65536.0 / Math.pow((255.0/catchRate),.25));
+			return ((CC/256)*(b/65536)+(Math.pow(b,3)/Math.pow(65536.0,3)*(1-CC/256)))*100;
 		}
 
 	}
 
 	public int calcMaxHP()
+	{
+		if (gen == 2)
 		{
-			if (gen == 2)
-			{
-				int numerator = (8 + baseHP + 50) * level;
-				int current = numerator / 50 + 10;
-				return current;
-			}
-			else
-			{
-				int numerator = (8 + 2*baseHP + 100) * level;
-				int current = numerator / 100 + 10;
-				return current;
-			}
+			int numerator = (8 + baseHP + 50) * level;
+			int current = numerator / 50 + 10;
+			return current;
 		}
+		else
+		{
+			int numerator = (8 + 2*baseHP + 100) * level;
+			int current = numerator / 100 + 10;
+			return current;
+		}
+	}
 }
-
-
-
