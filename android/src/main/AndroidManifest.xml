@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mischamichael.catchemall02.app" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.mischamichael.catchemall02.app.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".PokeSelect"/>
+        <activity android:name=".PokeBall"/>
+        <activity android:name=".Stat"/>
+        <activity android:name=".GenSel"/>
+        <activity android:name=".BallElse"/>
+        <activity android:name=".PokeSelect2_4"/>
+        <activity android:name=".Stat2_5"/>
+        <activity android:name=".PokeSelect5"/>
+    </application>
+
+</manifest>
